@@ -20,7 +20,6 @@ def extract_solution(solution_str):
     matches = list(re.finditer(answer_pattern, solution_str, re.DOTALL))
     if matches:
         final_answer = matches[-1].group(1).strip()
-        print(f"[DEBUG extract_solution] 成功提取模型答案: {final_answer}...")
     else:
         print("[DEBUG extract_solution] 未能提取模型conclusion")
         final_answer = None
@@ -42,7 +41,6 @@ def parse_solution_text_format(solution_text_format):
         else:
             print(f"[DEBUG parse_solution_text_format] 第{idx}行未匹配到有效内容")
     
-    print(f"[DEBUG parse_solution_text_format] 预期Ground truth状态: {expected_statuses}")
     return expected_statuses
 
 def parse_answer(answer_text, expected_names):
@@ -56,13 +54,11 @@ def parse_answer(answer_text, expected_names):
         match = pattern.search(answer_text)
         if match:
             status = match.group(1).lower()
-            print(f"[DEBUG parse_answer] 匹配预测身份: {name} -> {status}")
             predicted_statuses[name] = status
         else:
             print(f"[DEBUG parse_answer] 未找到{name}的身份预测")
             return None
     
-    print(f"[DEBUG parse_answer] 模型预测总结果: {predicted_statuses}")
     return predicted_statuses
 
 def compute_score(solution_str, ground_truth, method='strict', format_reward=1, answer_reward=1):
@@ -86,15 +82,13 @@ def compute_score(solution_str, ground_truth, method='strict', format_reward=1, 
 
     # 提取模型答案
     answer_text = extract_solution(solution_str)
-    if do_print:
-        print(f"[DEBUG compute_score] 模型预测原始答案！！！: {answer_text}")
 
     # 格式验证
-    has_think = '</think>' in solution_str
-    has_answer = ('<answer>' in solution_str) and ('</answer>' in solution_str)
+    has_think = '</think>' in answer_text
+    has_answer = ('<answer>' in answer_text) and ('</answer>' in answer_text)
     think_pos = solution_str.find('</think>')
     answer_pos = solution_str.find('<answer>')
-    format_ok = has_think and has_answer and (think_pos < answer_pos)
+    format_ok = has_think and has_answer and (think_pos + 1 == answer_pos)
     
     if do_print:
         print(f"[DEBUG compute_score] 格式检查结果:")
