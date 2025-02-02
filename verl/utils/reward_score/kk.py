@@ -64,8 +64,8 @@ def parse_answer(answer_text, expected_names):
 def compute_score(solution_str, ground_truth, method='strict', format_reward=1, answer_reward=1):
     """带详细日志的评分函数"""
     # 随机打印控制（每8次打印一次）
-    # do_print = random.randint(1, 8) == 1
-    do_print = 1
+    do_print = random.randint(1, 8) == 1
+
     if do_print:
         print("\n" + "="*100)
         print("[DEBUG compute_score] 开始处理新样本")
