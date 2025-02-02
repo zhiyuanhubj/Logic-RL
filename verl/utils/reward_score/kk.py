@@ -1,6 +1,8 @@
 import re
 import random
 
+from sympy import dotprint
+
 def extract_solution(solution_str):
     """Extract the answer from the solution string with logging"""   
     # 分割处理
@@ -84,21 +86,42 @@ def compute_score(solution_str, ground_truth, method='strict', format_reward=1, 
     answer_text,solution_str = extract_solution(solution_str)
     print(f"answer text!!!{solution_str}")
     # 格式验证
-    has_think = '</think>' in solution_str
-    has_answer = '<answer>' in solution_str
-    think_pos = solution_str.find('</think>') #只出现一次
-    answer_pos = solution_str.find('<answer>')
-    format_ok = has_think and has_answer and (think_pos < answer_pos)
-    
-    if do_print:
-        print(f"[DEBUG compute_score] 格式检查结果:")
-        print(f"  - 包含</think>: {has_think}")
-        print(f"  - 包含<answer>: {has_answer}")
-        print(f"  - </think>位置: {think_pos}, answer位置: {answer_pos}")
-        print(f"  - 格式是否有效: {format_ok}")
+    # 检查 <think> 和 </think> 是否各只出现一次
+    # 检查 <think> 和 </think> 是否各只出现一次
+    think_start = solution_str.find('<think>')
+    think_end = solution_str.find('</think>')
+    if think_start == -1 or think_end == -1:
+        print("Error: <think> or </think> tag is missing.")
+        format_ok = False
+    elif solution_str.count('<think>') != 1 or solution_str.count('</think>') != 1:
+        print("Error: <think> or </think> tag appears more than once.")
+        format_ok = False
+    else:
+        print("Info: <think> and </think> tags are present and appear only once.")
+
+        # 检查 <answer> 和 </answer> 是否各只出现一次
+        answer_start = solution_str.find('<answer>')
+        answer_end = solution_str.find('</answer>')
+        if answer_start == -1 or answer_end == -1:
+            print("Error: <answer> or </answer> tag is missing.")
+            format_ok = False
+        elif solution_str.count('<answer>') != 1 or solution_str.count('</answer>') != 1:
+            print("Error: <answer> or </answer> tag appears more than once.")
+            format_ok = False
+        else:
+            print("Info: <answer> and </answer> tags are present and appear only once.")
+
+            # 检查标签是否按顺序出现
+            if (think_start < think_end < answer_start < answer_end):
+                print("Info: Tags are in the correct order: <think>...</think><answer>...</answer>")
+                format_ok = True
+            else:
+                print("Error: Tags are not in the correct order.")
+                format_ok = False
 
     # 计算奖励
     format_reward_value = format_reward if format_ok else -1
+    print(f"Format is {'correct' if format_ok else 'incorrect'}.Format Reward value: {format_reward_value}.")
     
     answer_reward_value = 0
     if format_ok and answer_text is not None:
