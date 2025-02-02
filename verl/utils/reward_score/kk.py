@@ -1,153 +1,193 @@
 import re
-import random
+from typing import Dict, Tuple, Optional
 
-from sympy import dotprint
-
-def extract_solution(solution_str):
-    """Extract the answer from the solution string with logging"""   
-    # 分割处理
-    if "Assistant:" in solution_str:
-        solution_str = solution_str.split("Assistant:", 1)[1]
-        # print("[DEBUG extract_solution] 仅模型回复部分")
-        # print(solution_str)
-    elif "<|im_start|>assistant" in solution_str:
-        solution_str = solution_str.split("<|im_start|>assistant", 1)[1]
-        print("[DEBUG extract_solution] 仅模型回复部分")
-    else:
-        print("[DEBUG extract_solution] 未能找到模型回复")
-        return None
-
-    # 提取答案
-    answer_pattern = r'<answer>(.*?)</answer>'
-    matches = list(re.finditer(answer_pattern, solution_str, re.DOTALL))
-    if matches:
-        final_answer = matches[-1].group(1).strip()
-    else:
-        print("[DEBUG extract_solution] 未能提取模型conclusion")
-        final_answer = None
+def extract_solution(solution_str: str) -> Tuple[Optional[str], str]:
+    """Extracts the final answer from the model's response string.
     
-    return final_answer,solution_str
-
-def parse_solution_text_format(solution_text_format):
-    """解析标准答案时打印详细信息"""
-    
-    expected_statuses = {}
-    for idx, line in enumerate(solution_text_format.split('\n')):
-        line = line.strip()
+    Args:
+        solution_str: Raw response string from the language model
         
+    Returns:
+        Tuple containing (extracted_answer, processed_string)
+    """
+    # Split response to isolate assistant output
+    if "Assistant:" in solution_str:
+        processed_str = solution_str.split("Assistant:", 1)[1]
+    elif "<|im_start|>assistant" in solution_str:
+        processed_str = solution_str.split("<|im_start|>assistant", 1)[1]
+    else:
+        print("[Error] Failed to locate model response header")
+        return None, solution_str
+
+    # Extract final answer using XML-style tags
+    answer_pattern = r'<answer>(.*?)</answer>'
+    matches = list(re.finditer(answer_pattern, processed_str, re.DOTALL))
+    
+    if not matches:
+        print("[Error] No valid answer tags found")
+        return None, processed_str
+        
+    final_answer = matches[-1].group(1).strip()
+    return final_answer, processed_str
+
+def parse_solution_text_format(solution_text: str) -> Dict[str, str]:
+    """Parses ground truth solution text into status dictionary.
+    
+    Args:
+        solution_text: Formatted solution text from dataset
+        
+    Returns:
+        Dictionary mapping character names to their roles (knight/knave)
+    """
+    status_dict = {}
+    print("\n[Ground Truth Parsing]")
+    
+    for line in solution_text.split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+            
         match = re.search(r'\b([A-Za-z]+)\b.*?\b(knight|knave)\b', line, re.IGNORECASE)
         if match:
-            name = match.group(1)
-            status = match.group(2).lower()
-            expected_statuses[name] = status
+            name, role = match.groups()
+            status_dict[name] = role.lower()
+            print(f"  Found: {name} → {role}")
         else:
-            print(f"[DEBUG parse_solution_text_format] 第{idx}行未匹配到有效内容")
+            print(f"  [Warning] Unparseable line: '{line}'")
     
-    return expected_statuses
+    return status_dict
 
-def parse_answer(answer_text, expected_names):
-    """解析模型答案时打印详细信息"""
+def parse_model_answer(answer_text: str, expected_names: list) -> Optional[Dict[str, str]]:
+    """Parses model's answer text into status dictionary.
     
-    predicted_statuses = {}
-    print(f"[DEBUG parse_answer] 需要匹配的名字列表: {expected_names}")
+    Args:
+        answer_text: Text extracted from model's <answer> tags
+        expected_names: List of character names requiring identification
+        
+    Returns:
+        Dictionary mapping character names to predicted roles, or None if incomplete
+    """
+    status_dict = {}
+    print("\n[Model Answer Parsing]")
+    print(f"  Expected characters: {expected_names}")
     
     for name in expected_names:
-        pattern = re.compile(rf'\b{re.escape(name)}\b.*?\b(knight|knave)\b', re.IGNORECASE)
+        pattern = re.compile(
+            rf'\b{re.escape(name)}\b.*?\b(knight|knave)\b', 
+            re.IGNORECASE
+        )
         match = pattern.search(answer_text)
+        
         if match:
-            status = match.group(1).lower()
-            predicted_statuses[name] = status
+            role = match.group(1).lower()
+            status_dict[name] = role
+            print(f"  Found: {name} → {role}")
         else:
-            print(f"[DEBUG parse_answer] 未找到{name}的身份预测")
+            print(f"  [Error] Missing identification for {name}")
             return None
     
-    return predicted_statuses
+    return status_dict
 
-def compute_score(solution_str, ground_truth, method='strict', format_reward=1, answer_reward=1):
-    """带详细日志的评分函数"""
-    # 随机打印控制（每8次打印一次）
-    # do_print = random.randint(1, 8) == 1
-    do_print = 1
-    if do_print:
-        print("\n" + "="*100)
-        print("[DEBUG compute_score] 开始处理新样本")
-        print(f"[DEBUG compute_score]完整对话: {solution_str}")
-        print("="*50)
-    # 解析标准答案
-    solution_text_format = ground_truth.get('solution_text_format', '')
-    print(f"Ground Truth:{solution_text_format}")
-    print("="*50)
-    expected_statuses = parse_solution_text_format(solution_text_format)
-    expected_names = list(expected_statuses.keys())
-    print(f"expected names: {expected_names}")
+def validate_response_structure(processed_str: str) -> bool:
+    """Performs comprehensive validation of response structure.
     
-
-    # 提取模型答案
-    answer_text,solution_str = extract_solution(solution_str)
-    print(f"answer text!!!{solution_str}")
-    # 格式验证
-    # 检查 <think> 和 </think> 是否各只出现一次
-    # 检查 <think> 和 </think> 是否各只出现一次
-    think_start = solution_str.find('<think>')
-    think_end = solution_str.find('</think>')
-    if think_start == -1 or think_end == -1:
-        print("Error: <think> or </think> tag is missing.")
-        format_ok = False
-    elif solution_str.count('<think>') != 1 or solution_str.count('</think>') != 1:
-        print("Error: <think> or </think> tag appears more than once.")
-        format_ok = False
-    else:
-        print("Info: <think> and </think> tags are present and appear only once.")
-
-        # 检查 <answer> 和 </answer> 是否各只出现一次
-        answer_start = solution_str.find('<answer>')
-        answer_end = solution_str.find('</answer>')
-        if answer_start == -1 or answer_end == -1:
-            print("Error: <answer> or </answer> tag is missing.")
-            format_ok = False
-        elif solution_str.count('<answer>') != 1 or solution_str.count('</answer>') != 1:
-            print("Error: <answer> or </answer> tag appears more than once.")
-            format_ok = False
-        else:
-            print("Info: <answer> and </answer> tags are present and appear only once.")
-
-            # 检查标签是否按顺序出现
-            if (think_start < think_end < answer_start < answer_end):
-                print("Info: Tags are in the correct order: <think>...</think><answer>...</answer>")
-                format_ok = True
-            else:
-                print("Error: Tags are not in the correct order.")
-                format_ok = False
-
-    # 计算奖励
-    format_reward_value = format_reward if format_ok else -1
-    print(f"Format is {'correct' if format_ok else 'incorrect'}.Format Reward value: {format_reward_value}.")
-    
-    answer_reward_value = 0
-    if format_ok and answer_text is not None:
-        predicted_statuses = parse_answer(answer_text, expected_names)
-        if do_print:
-            print(f"[DEBUG compute_score] 模型预测身份结果: {predicted_statuses}")
-            print(f"[DEBUG compute_score] Ground truth身份结果: {expected_statuses}")
+    Args:
+        processed_str: Processed response string from the model
         
-        if predicted_statuses == expected_statuses:
-            answer_reward_value = answer_reward
-            if do_print:
-                print("[DEBUG compute_score] 答案完全匹配!")
-        else:
-            answer_reward_value = -1
-            if do_print:
-                print("[DEBUG compute_score] 答案不匹配")
+    Returns:
+        Boolean indicating whether all formatting requirements are met
+    """
+    print("\n[Structure Validation]")
+    validation_passed = True
+
+    # Check required tags
+    tags = {
+        'think_start': ('<think>', 1),
+        'think_end': ('</think>', 1),
+        'answer_start': ('<answer>', 1),
+        'answer_end': ('</answer>', 1)
+    }
+
+    positions = {}
+    for tag_name, (tag_str, expected_count) in tags.items():
+        count = processed_str.count(tag_str)
+        positions[tag_name] = pos = processed_str.find(tag_str)
+        
+        print(f"  {tag_str}: count={count}, position={pos}")
+        
+        if count != expected_count:
+            print(f"  [Error] {tag_str} appears {count} times (expected {expected_count})")
+            validation_passed = False
+
+    # Verify tag order
+    if (positions['think_start'] > positions['think_end'] or
+        positions['think_end'] > positions['answer_start'] or
+        positions['answer_start'] > positions['answer_end']):
+        print("  [Error] Incorrect tag order: Expected <think>...</think><answer>...</answer>")
+        validation_passed = False
     else:
-        if do_print:
-            print("[DEBUG compute_score] 格式无效或答案为空")
+        print("  Tag sequence validation passed")
+
+    return validation_passed
+
+def compute_score(solution_str: str, 
+                 ground_truth: Dict[str, str],
+                 format_reward: int = 1,
+                 answer_reward: int = 1) -> int:
+    """Computes comprehensive score for model response.
     
-    total_reward = format_reward_value + answer_reward_value
-    if do_print:
-        print(f"[DEBUG compute_score] 最终奖励计算:")
-        print(f"  - 格式奖励: {format_reward_value}")
-        print(f"  - 答案奖励: {answer_reward_value}")
-        print(f"  - 总奖励: {total_reward}")
-        print("="*100 + "\n")
+    Args:
+        solution_str: Raw model response string
+        ground_truth: Dictionary containing ground truth data
+        format_reward: Points awarded/deducted for format correctness
+        answer_reward: Points awarded/deducted for answer correctness
+        
+    Returns:
+        Total score (sum of format and answer rewards)
+    """
+    print("\n" + "="*80)
+    print(" Processing New Sample ".center(80, '='))
     
-    return total_reward
+    # Parse ground truth data
+    solution_text = ground_truth.get('solution_text_format', '')
+    gt_status = parse_solution_text_format(solution_text)
+    expected_names = list(gt_status.keys())
+    print(f"[Ground Truth] Final identities: {gt_status}")
+
+    # Extract model answer
+    answer_text, processed_str = extract_solution(solution_str)
+    print(f"\n[Model Response]\n{processed_str}")
+
+    # Validate response structure
+    format_correct = validate_response_structure(processed_str)
+    format_score = format_reward if format_correct else -abs(format_reward)
+    print(f"\n  Format validation: {'PASS' if format_correct else 'FAIL'}")
+    print(f"  Format score: {format_score}")
+
+    # Validate answer content
+    answer_score = 0
+    if format_correct and answer_text:
+        pred_status = parse_model_answer(answer_text, expected_names)
+        if pred_status:
+            print(f"\n[Content Validation]")
+            print(f"  Expected: {gt_status}")
+            print(f"  Predicted: {pred_status}")
+            
+            if pred_status == gt_status:
+                answer_score = answer_reward
+                print("  Content validation: FULL MATCH")
+            else:
+                answer_score = -abs(answer_reward)
+                print("  Content validation: MISMATCH")
+    else:
+        print("\n[Content Validation] Skipped due to format errors or missing answer")
+
+    total_score = format_score + answer_score
+    print("\n" + "-"*80)
+    print(f" Final Score ".center(80, '-'))
+    print(f"  Format: {format_score}")
+    print(f"  Answer: {answer_score}")
+    print(f"  Total: {total_score}")
+    print("="*80 + "\n")
+
+    return total_score
