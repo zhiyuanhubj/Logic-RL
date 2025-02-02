@@ -6,8 +6,8 @@ def extract_solution(solution_str):
     # 分割处理
     if "Assistant:" in solution_str:
         solution_str = solution_str.split("Assistant:", 1)[1]
-        print("[DEBUG extract_solution] 仅模型回复部分")
-        print(solution_str)
+        # print("[DEBUG extract_solution] 仅模型回复部分")
+        # print(solution_str)
     elif "<|im_start|>assistant" in solution_str:
         solution_str = solution_str.split("<|im_start|>assistant", 1)[1]
         print("[DEBUG extract_solution] 仅模型回复部分")
@@ -24,7 +24,7 @@ def extract_solution(solution_str):
         print("[DEBUG extract_solution] 未能提取模型conclusion")
         final_answer = None
     
-    return final_answer
+    return final_answer,solution_str
 
 def parse_solution_text_format(solution_text_format):
     """解析标准答案时打印详细信息"""
@@ -64,8 +64,8 @@ def parse_answer(answer_text, expected_names):
 def compute_score(solution_str, ground_truth, method='strict', format_reward=1, answer_reward=1):
     """带详细日志的评分函数"""
     # 随机打印控制（每8次打印一次）
-    do_print = random.randint(1, 8) == 1
-
+    # do_print = random.randint(1, 8) == 1
+    do_print = 1
     if do_print:
         print("\n" + "="*100)
         print("[DEBUG compute_score] 开始处理新样本")
@@ -81,14 +81,14 @@ def compute_score(solution_str, ground_truth, method='strict', format_reward=1, 
     
 
     # 提取模型答案
-    answer_text = extract_solution(solution_str)
-
+    answer_text,solution_str = extract_solution(solution_str)
+    print(f"answer text!!!{solution_str}")
     # 格式验证
-    has_think = '</think>' in answer_text
-    has_answer = ('<answer>' in answer_text) and ('</answer>' in answer_text)
-    think_pos = solution_str.find('</think>')
+    has_think = '</think>' in solution_str
+    has_answer = '<answer>' in solution_str
+    think_pos = solution_str.find('</think>') #只出现一次
     answer_pos = solution_str.find('<answer>')
-    format_ok = has_think and has_answer and (think_pos + 1 == answer_pos)
+    format_ok = has_think and has_answer and (think_pos < answer_pos)
     
     if do_print:
         print(f"[DEBUG compute_score] 格式检查结果:")
