@@ -177,10 +177,10 @@ def compute_score(solution_str: str,
                 answer_score = 2
                 print("  Content validation: FULL MATCH")
             else:
-                answer_score = -0.5
+                answer_score = -1.5
                 print("  Content validation: MISMATCH")
         else:
-            answer_score = -0.5
+            answer_score = -2
             print( "Fail to parse answer")
     else:
         print("\n[Content Validation] Skipped due to format errors or missing answer")
