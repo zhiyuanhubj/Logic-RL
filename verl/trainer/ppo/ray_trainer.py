@@ -672,6 +672,7 @@ class RayPPOTrainer(object):
                         with _timer('save_checkpoint', timing_raw):
                             self._save_checkpoint()
 
+
                 # collect metrics
                 metrics.update(compute_data_metrics(batch=batch, use_critic=self.use_critic))
                 metrics.update(compute_timing_metrics(batch=batch, timing_raw=timing_raw))
@@ -681,9 +682,12 @@ class RayPPOTrainer(object):
 
                 self.global_steps += 1
 
-                if self.global_steps >= self.total_training_steps:
 
-                    # perform validation after training
+                if self.global_steps >= self.total_training_steps:
+                    # 在所有训练步骤结束时保存最后一个检查点
+                    with _timer('save_checkpoint', timing_raw):
+                        self._save_checkpoint()
+                    # 执行验证
                     if self.val_reward_fn is not None:
                         val_metrics = self._validate()
                         pprint(f'Final validation metrics: {val_metrics}')
