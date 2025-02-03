@@ -1,3 +1,4 @@
+      
 # Copyright 2024 Bytedance Ltd. and/or its affiliates
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -279,6 +280,24 @@ def compute_timing_metrics(batch, timing_raw):
             )) & set(timing_raw.keys())
         },
     }
+
+
+def compute_reward_metrics(batch):
+    reward_tensor = batch.batch['token_level_scores'].sum(-1)
+
+    reward_metrics = {}
+    reward_metrics["reward/mean"] = torch.mean(reward_tensor).detach().item()
+    # Calculate all_correct ratio (value == 3)
+    all_correct = torch.sum(reward_tensor == 3).float() / reward_tensor.numel()
+    reward_metrics["reward/all_correct_ratio"] = all_correct.detach().item()
+    # Calculate format_error ratio (value == -1)
+    format_error = torch.sum(reward_tensor == -1).float() / reward_tensor.numel()
+    reward_metrics["reward/format_error_ratio"] = format_error.detach().item()
+    # Calculate wrong answer ratio (value == -1)
+    format_error = torch.sum(reward_tensor == -0.5).float() / reward_tensor.numel()
+    reward_metrics["reward/wrong_answer_ratio"] = format_error.detach().item()
+    
+    return reward_metrics
 
 
 @contextmanager
@@ -659,6 +678,10 @@ class RayPPOTrainer(object):
                             actor_output = self.actor_rollout_wg.update_actor(batch)
                         actor_output_metrics = reduce_metrics(actor_output.meta_info['metrics'])
                         metrics.update(actor_output_metrics)
+                    
+                    # reward
+                    reward_metrics = compute_reward_metrics(batch)
+                    metrics.update(reward_metrics)
 
                     # validate
                     if self.val_reward_fn is not None and self.config.trainer.test_freq > 0 and \
@@ -693,3 +716,5 @@ class RayPPOTrainer(object):
                         pprint(f'Final validation metrics: {val_metrics}')
                         logger.log(data=val_metrics, step=self.global_steps)
                     return
+
+    
