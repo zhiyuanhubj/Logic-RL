@@ -39,5 +39,3 @@ python3 -m verl.trainer.main_ppo \
     trainer.save_freq=-1 \
     trainer.test_freq=20 \
     trainer.total_epochs=1 $@
-
-# srun -p AI4Good_L -t 24:00:00 --gres=gpu:8 bash /mnt/petrelfs/renqingnan/xietian/Logic-RL/scripts/train_grpo_qwen7B_8gpu.sh
