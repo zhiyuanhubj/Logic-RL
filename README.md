@@ -1,18 +1,46 @@
-# Logic R1
 
-Success to reproduce deepseek r1 zero on 2K Logic Puzzle Dataset.
+# Logic R1 
 
-## After Rule Based RL
-- **Uncertainty marking** (flagging ambiguous steps for subsequent verification)
-- **Multi-path exploration** (systematically testing alternative reasoning paths)
-- **Analytical backtracking** (re-examining previous statements through re-analysis)
-- **Progressive summarization** (maintaining intermediate conclusions via explicit summarization steps)
-- **Final-answer verification** (performing comprehensive consistency checks before output)
-- **Multilingual code-switching in reasoning** (exhibiting Chinese reasoning traces despite English-only training data, with final answers maintained in English)
+## Successfully reproduced DeepSeek R1's zero-shot performance on 2K Logic Puzzle Dataset.
+See project explanation [here](https://evxpwrsfkdb.feishu.cn/docx/NokEdaMBmo6aqZxVdxkcSm2cnab?from=from_copylink).
 
-[Model Output Example](response.png) | [Average Output Length](mean_length.png)
+Wandb project page & Logs are coming soon.
 
-## Installation
+---
+
+## ✨ Enhanced Features (After Rule-Based RL)
+
+| 🚩 Uncertainty Marking | 🔀 Multi-path Exploration |
+|------------------------|---------------------------|
+| Flagging ambiguous steps for verification | Testing alternative reasoning paths |
+
+| 🔍 Analytical Backtracking | 📝 Progressive Summarization |
+|---------------------------|-----------------------------|
+| Re-examining previous statements through re-analysis | Maintaining intermediate conclusions via explicit summaries |
+
+| ✅ Final-answer Verification | 🌐 Multilingual CSwitching |
+|-----------------------------|-------------------------------|
+| Comprehensive consistency checks before output | Chinese reasoning traces with English answers |
+
+---
+
+## 📸 Results Preview
+
+<table>
+  <tr>
+    <td align="center"><img src="response.png" width="400" alt="Model Output"></td>
+    <td align="center"><img src="mean_length.png" width="400" alt="Output Length"></td>
+  </tr>
+  <tr>
+    <td align="center">Model Output Example</td>
+    <td align="center">Average Output Length</td>
+  </tr>
+</table>
+
+---
+
+## 🛠️ Installation
+
 ```bash
 conda create -n logic python=3.9
 pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
@@ -22,16 +50,18 @@ pip install -e .  # For verl integration
 pip install wandb IPython matplotlib
 ```
 
-## Data Preparation
+---
 
-### Base Model Configuration
+## 📂 Data Preparation
+
+### Base Model
 ```bash
 python ./examples/data_preprocess/kk.py \
     --local_dir {processed_data_path} \
     --data_path {raw_data_path}
 ```
 
-### Instruct-Tuned Model Configuration
+### Instruct-Tuned Model
 ```bash
 python ./examples/data_preprocess/kk.py \
     --template_type=qwen-instruct \
@@ -39,19 +69,26 @@ python ./examples/data_preprocess/kk.py \
     --data_path {raw_data_path}
 ```
 
-## Training Execution
+---
+
+## 🚀 Training Execution
 ```bash
 conda activate logic
-bash main_grpo.sh  # 4 A100 80G
+bash main_grpo.sh  # 4×A100 80G
 ```
 
-## Implementation Details
-- **Reward Modeling**: Customizable scoring functions implemented in `verl/utils/reward_score/kk.py`
-- **Training Configuration**: Reference implementation in `scripts/train_ppo.sh`
-- **Hardware Requirements**: Default 4-GPU configuration (modifiable in `kk.sh`)
-- **Monitoring**: Integrated Weights & Biases logging (requires prior `wandb login`)
+---
 
+## ⚙️ Implementation Details
 
-## Acknowledgements
-[TinyZero](https://github.com/Jiayi-Pan/TinyZero).
-```
+| Component              | Location                          |
+|------------------------|-----------------------------------|
+| 🏆 Reward Modeling     | `verl/utils/reward_score/kk.py`   |
+| ⚙️ Training Config    | `scripts/train_ppo.sh`            |
+| 💻 Hardware Setup      | 4-GPU (modify in `kk.sh`)         |
+| 📊 Monitoring          | Weights & Biases (requires login) |
+
+---
+
+## 🙏 Acknowledgements
+[TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
