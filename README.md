@@ -10,17 +10,13 @@ Wandb project page & Logs are coming soon.
 
 ## ✨ Enhanced Features (After Rule-Based RL)
 
-| 🚩 Uncertainty Marking | 🔀 Multi-path Exploration |
+| 🚩 Uncertainty Marking | 📝 Progressive Summarization |
 |------------------------|---------------------------|
-| Flagging ambiguous steps for verification | Testing alternative reasoning paths |
+| Flagging ambiguous steps for verification | Maintaining intermediate conclusions |
 
-| 🔍 Analytical Backtracking | 📝 Progressive Summarization |
-|---------------------------|-----------------------------|
-| Re-examining previous statements through re-analysis | Maintaining intermediate conclusions via explicit summaries |
-
-| ✅ Final-answer Verification | 🌐 Multilingual CSwitching |
+| ✅ Self Verification | 🌐 Multilingual Switching |
 |-----------------------------|-------------------------------|
-| Comprehensive consistency checks before output | Chinese reasoning traces with English answers |
+| First verify then before output | Chinese reasoning traces with English answers |
 
 ---
 
@@ -84,9 +80,7 @@ bash main_grpo.sh  # 4×A100 80G
 | Component              | Location                          |
 |------------------------|-----------------------------------|
 | 🏆 Reward Modeling     | `verl/utils/reward_score/kk.py`   |
-| ⚙️ Training Config    | `scripts/train_ppo.sh`            |
-| 💻 Hardware Setup      | 4-GPU (modify in `kk.sh`)         |
-| 📊 Monitoring          | Weights & Biases (requires login) |
+| 📚 Data Preprocessing   | `examples/data_preprocess/kk.py`  |
 
 ---
 
