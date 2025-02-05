@@ -3,8 +3,8 @@ MODEL_PATH=xxx
 export VLLM_ATTENTION_BACKEND=XFORMERS
 python3 -m verl.trainer.main_ppo \
     algorithm.adv_estimator=grpo \
-    data.train_files=xxx \
-    data.val_files=xxx \
+    data.train_files=data/xxx \
+    data.val_files=dataxxx \
     data.train_batch_size=8 \
     data.val_batch_size=8 \
     data.max_prompt_length=400 \
