@@ -12,11 +12,11 @@ Wandb project[here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--Vm
 
 | 🚩 Uncertainty Marking | 📝 Progressive Summarization |
 |------------------------|---------------------------|
-| Flagging ambiguous steps for verification | Maintaining intermediate conclusions |
+| Flag ambiguous steps for verification | Maintain intermediate conclusions |
 
 | ✅ Self Verification | 🌐 Multilingual Switching |
 |-----------------------------|-------------------------------|
-| First verify then before output | Chinese reasoning traces with English answers |
+| First verify then  answer | Chinese reasoning traces with English answers |
 
 ---
 
@@ -85,5 +85,6 @@ bash main_grpo.sh  # 4×A100 80G
 ---
 
 ## 🙏 Acknowledgements
-[TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
-[Verl](https://github.com/volcengine/verl) 🔗
+- [Verl](https://github.com/volcengine/verl) 🔗
+- [TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
+
