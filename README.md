@@ -50,6 +50,10 @@ pip install wandb IPython matplotlib
 
 ## 📂 Data Preparation
 
+You can directly use /data.
+
+For your own data generation, here's a demo:
+
 ### Base Model
 ```bash
 python ./examples/data_preprocess/kk.py \
@@ -57,7 +61,7 @@ python ./examples/data_preprocess/kk.py \
     --data_path {raw_data_path}
 ```
 
-### Instruct-Tuned Model
+### Instruct Model
 ```bash
 python ./examples/data_preprocess/kk.py \
     --template_type=qwen-instruct \
@@ -92,7 +96,7 @@ bash main_grpo.sh  # 4×A100 80G
 author       = {Tian Xie and Qingnan Ren and Yuqian Hong},
 title        = {Logic-RL},
 howpublished = {https://github.com/Unakar/Logic-RL},
-note         = {Accessed: 2025-02-3},
+note         = {Accessed: 2025-02-03},
 year         = {2025}
 }
 ```
