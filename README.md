@@ -84,6 +84,23 @@ bash main_grpo.sh  # 4×A100 80G
 
 ---
 
+---
+
+## Citation
+```
+@misc{tinyzero,
+author       = {Tian Xie and Qingnan Ren and Yuqian Hong},
+title        = {Logic-RL},
+howpublished = {https://github.com/Unakar/Logic-RL},
+note         = {Accessed: 2025-02-3},
+year         = {2025}
+}
+```
+
+---
+
+---
+
 ## 🙏 Acknowledgements
 - [Verl](https://github.com/volcengine/verl) 🔗
 - [TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
