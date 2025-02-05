@@ -86,3 +86,4 @@ bash main_grpo.sh  # 4×A100 80G
 
 ## 🙏 Acknowledgements
 [TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
+[Verl](https://github.com/volcengine/verl) 🔗
