@@ -88,7 +88,7 @@ bash main_grpo.sh  # 4×A100 80G
 
 ## Citation
 ```
-@misc{tinyzero,
+@misc{logic-rl,
 author       = {Tian Xie and Qingnan Ren and Yuqian Hong},
 title        = {Logic-RL},
 howpublished = {https://github.com/Unakar/Logic-RL},
