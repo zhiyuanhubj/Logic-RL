@@ -1,5 +1,5 @@
 
-# Logic R1 
+# Logic Rl
 
 ## Successfully reproduced DeepSeek R1 Zero on 2K Tiny Logic Puzzle Dataset.
 See project explanation [here](https://evxpwrsfkdb.feishu.cn/docx/NokEdaMBmo6aqZxVdxkcSm2cnab?from=from_copylink).
