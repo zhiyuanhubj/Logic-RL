@@ -1,10 +1,10 @@
 
 # Logic Rl
 
-## Successfully reproduced DeepSeek R1 Zero on 2K Tiny Logic Puzzle Dataset.
+## 🎉 Successfully reproduced DeepSeek R1 Zero on 2K Tiny Logic Puzzle Dataset.
 See project explanation [here](https://evxpwrsfkdb.feishu.cn/docx/NokEdaMBmo6aqZxVdxkcSm2cnab?from=from_copylink).
 
-Wandb project[here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--VmlldzoxMTIwOTYyNw?accessToken=gnbnl5mu5pwfww7gtwxymohg85w7d7vthvjvbl4w8yxg0a99vf1k22m11e61cvv8).
+Wandb project [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--VmlldzoxMTIwOTYyNw?accessToken=gnbnl5mu5pwfww7gtwxymohg85w7d7vthvjvbl4w8yxg0a99vf1k22m11e61cvv8).
 
 ---
 
@@ -93,7 +93,7 @@ bash main_grpo.sh  # 4×A100 80G
 ## Citation
 ```
 @misc{logic-rl,
-author       = {Tian Xie and Qingnan Ren and Yuqian Hong},
+author       = {Tian Xie and Qingnan Ren and Yuqian Hong and Zitian Gao},
 title        = {Logic-RL},
 howpublished = {https://github.com/Unakar/Logic-RL},
 note         = {Accessed: 2025-02-03},
@@ -108,4 +108,4 @@ year         = {2025}
 ## 🙏 Acknowledgements
 - [Verl](https://github.com/volcengine/verl) 🔗
 - [TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
-
+- [Knights and Knaves (K&K) puzzles dataset](https://github.com/AlphaPav/mem-kk-logic) 🔗
