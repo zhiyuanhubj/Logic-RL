@@ -8,15 +8,13 @@ Wandb project [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--V
 
 ---
 
+
 ## ✨ Enhanced Features (After Rule-Based RL)
 
-| 🚩 Uncertainty Marking | 📝 Progressive Summarization |
-|------------------------|---------------------------|
-| Flag ambiguous steps for verification | Maintain intermediate conclusions |
+| 🚩 Uncertainty Marking | 📝 Progressive Summarization | ✅ Self Verification | 🌐 Multilingual Switching |
+|------------------------|-----------------------------|---------------------|--------------------------|
+| Flag ambiguous steps for verification | Maintain intermediate conclusions | First verify then answer | Chinese reasoning traces with English answers |
 
-| ✅ Self Verification | 🌐 Multilingual Switching |
-|-----------------------------|-------------------------------|
-| First verify then  answer | Chinese reasoning traces with English answers |
 
 ---
 
