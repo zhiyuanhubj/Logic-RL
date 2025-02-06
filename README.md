@@ -88,8 +88,6 @@ bash main_grpo.sh  # 4×A100 80G
 
 ---
 
----
-
 ## Benchmark
 
 | Model                                                             | 2ppl | 3ppl | 4ppl | 5ppl | 6ppl | 7ppl | 8ppl |
@@ -97,7 +95,7 @@ bash main_grpo.sh  # 4×A100 80G
 | o1-2024-12-17               | 0.83 | 0.51 | 0.38 | 0.38 | 0.35 | 0.30 | 0.20 |
 | Qwen2.5-7B-Logic-RL (ours)  | 0.68 | 0.59 | 0.44 | 0.34 | 0.22 | 0.16 | 0.15 |
 
-
+Our model only used 2K training data with 400 training steps. More model benchmarks will be updated later this week.
 
 ---
 
@@ -111,8 +109,6 @@ note         = {Accessed: 2025-02-03},
 year         = {2025}
 }
 ```
-
----
 
 ---
 
