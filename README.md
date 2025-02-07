@@ -12,7 +12,7 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
 ---
 
 
-## ✨ Enhanced Features (After Rule-Based RL)
+## Enhanced Features (After Rule-Based RL)
 
 | 🚩 Uncertainty Marking | 📝 Progressive Summarization | ✅ Self Verification | 🌐 Multilingual Switching |
 |------------------------|-----------------------------|---------------------|--------------------------|
@@ -63,7 +63,7 @@ pip install wandb IPython matplotlib
 
 ---
 
-## 📂 Data Preparation
+## Data Preparation
 
 You can directly use /data.
 
@@ -86,7 +86,7 @@ python ./examples/data_preprocess/kk.py \
 
 ---
 
-## 🚀 Training Execution
+## Training Execution
 ```bash
 conda activate logic
 bash main_grpo.sh  # 4×A100 80G
@@ -98,8 +98,8 @@ bash main_grpo.sh  # 4×A100 80G
 
 | Component              | Location                          |
 |------------------------|-----------------------------------|
-| 🏆 Reward Modeling     | `verl/utils/reward_score/kk.py`   |
-| 📚 Data Preprocessing   | `examples/data_preprocess/kk.py`  |
+| Reward Modeling     | `verl/utils/reward_score/kk.py`   |
+| Data Preprocessing   | `examples/data_preprocess/kk.py`  |
 
 ---
 
@@ -117,7 +117,7 @@ year         = {2025}
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 - [Verl](https://github.com/volcengine/verl) 🔗
 - [TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
 - [Knights and Knaves (K&K) puzzles dataset](https://github.com/AlphaPav/mem-kk-logic) 🔗
