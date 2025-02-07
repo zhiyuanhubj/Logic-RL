@@ -186,10 +186,9 @@ def compute_reinforce_plus_plus_outcome_advantage(token_level_rewards: torch.Ten
             # Reset after EOS
             running_return = running_return * eos_mask[:, t]
 
-    # normalize returns (is this necessary?)
-    returns = (returns - returns.mean()) / (returns.std() + epsilon)
+        advantages = verl_F.masked_whiten(returns, eos_mask)
        
-    return returns, returns
+    return advantages, returns
 
 
 def compute_rewards(token_level_scores, old_log_prob, ref_log_prob, kl_ratio):
