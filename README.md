@@ -1,9 +1,9 @@
 
 # Logic Rl
 
-## 🎉 Successfully reproduced DeepSeek R1 Zero on 2K Logic Puzzle Dataset.
+## 🎉 **Successfully reproduced DeepSeek R1 Zero on 2K Logic Puzzle Dataset.**
 
-📢 **Our detailed technical report is coming soon! Stay tuned!** 
+## 📢 **Our detailed technical report is coming soon! Stay tuned!** 
 
 See project explanation : [here](https://evxpwrsfkdb.feishu.cn/docx/NokEdaMBmo6aqZxVdxkcSm2cnab?from=from_copylink).
 
