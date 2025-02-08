@@ -25,12 +25,18 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
 
 <table>
   <tr>
-    <td align="center"><img src="response.png" width="400" alt="Model Output"></td>
-    <td align="center"><img src="mean_length.png" width="400" alt="Output Length"></td>
+    <td align="center"><img src="./pics/test_score_plot_v1.jpg" width="400" alt="Test Score"></td>
+    <td align="center"><img src="./pics/response_mean_length_v2.png" width="400" alt="Output Length"></td>
+  </tr>
+  <tr>
+    <td align="center">Test Score Plot</td>
+    <td align="center">Average Output Length Plot</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="./pics/response.png" width="800" alt="Model Output"></td>
   </tr>
   <tr>
     <td align="center">Model Output Example</td>
-    <td align="center">Average Output Length</td>
   </tr>
 </table>
 
