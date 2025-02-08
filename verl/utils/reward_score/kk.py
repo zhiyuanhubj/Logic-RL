@@ -71,6 +71,14 @@ def parse_model_answer(answer_text: str, expected_names: list) -> Optional[Dict[
     print("\n[Model Answer Parsing]")
     print(f"  Expected characters: {expected_names}")
     
+    knight_count = answer_text.lower().count('knight')
+    knave_count = answer_text.lower().count('knave')
+
+    print(f"  Number of predicted roles: {knight_count + knave_count}")
+    if knight_count + knave_count != len(expected_names):
+        print(f"  [Error] Number of characters mismatch: {knight_count + knave_count} != {len(expected_names)}")
+        return None
+
     for name in expected_names:
         pattern = re.compile(
             rf'\b{re.escape(name)}\b.*?\b(knight|knave)\b', 
@@ -183,6 +191,7 @@ def compute_score(solution_str: str,
             answer_score = -2
             print( "Fail to parse answer")
     else:
+        answer_score = -2
         print("\n[Content Validation] Skipped due to format errors or missing answer")
 
     total_score = format_score + answer_score
