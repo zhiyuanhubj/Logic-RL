@@ -1,15 +1,18 @@
 
 # Logic Rl
 
-## 🎉 Successfully reproduced DeepSeek R1 Zero on 2K Logic Puzzle Dataset.
-See project explanation [here](https://evxpwrsfkdb.feishu.cn/docx/NokEdaMBmo6aqZxVdxkcSm2cnab?from=from_copylink).
+## 🎉 **Successfully reproduced DeepSeek R1 Zero on 2K Logic Puzzle Dataset.**
 
-Wandb project [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--VmlldzoxMTIwOTYyNw?accessToken=gnbnl5mu5pwfww7gtwxymohg85w7d7vthvjvbl4w8yxg0a99vf1k22m11e61cvv8).
+## 📢 **Our detailed technical report is coming soon! Stay tuned!** 
+
+See project explanation : [here](https://evxpwrsfkdb.feishu.cn/docx/NokEdaMBmo6aqZxVdxkcSm2cnab?from=from_copylink).
+
+Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--VmlldzoxMTIwOTYyNw?accessToken=gnbnl5mu5pwfww7gtwxymohg85w7d7vthvjvbl4w8yxg0a99vf1k22m11e61cvv8).
 
 ---
 
 
-## ✨ Enhanced Features (After Rule-Based RL)
+## Enhanced Features (After Rule-Based RL)
 
 | 🚩 Uncertainty Marking | 📝 Progressive Summarization | ✅ Self Verification | 🌐 Multilingual Switching |
 |------------------------|-----------------------------|---------------------|--------------------------|
@@ -40,6 +43,7 @@ Wandb project [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--V
 | o1-2024-12-17               | 0.83 | 0.51 | 0.38 | 0.38 | 0.35 | 0.30 | 0.20 |
 | GPT-4o                      | 0.68 | 0.57 | 0.49 | 0.32 | 0.23 | 0.21 | 0.11 |
 | Deepseek-Math-7b            | 0.35 | 0.21 | 0.08 | 0.06 | 0.02 | 0.00 | 0.00 |
+| Qwen2.5-7B-Instruct-1M      | 0.49 | 0.40 | 0.25 | 0.11 | 0.02 | 0.06 | 0.01 |
 | Qwen2.5-7B-Logic-RL (ours)  | 0.68 | 0.59 | 0.44 | 0.34 | 0.22 | 0.16 | 0.15 |
 
 Our model only used 2K training data with 400 training steps. More model benchmarks will be updated later this week.
@@ -59,7 +63,7 @@ pip install wandb IPython matplotlib
 
 ---
 
-## 📂 Data Preparation
+## Data Preparation
 
 You can directly use /data.
 
@@ -82,7 +86,7 @@ python ./examples/data_preprocess/kk.py \
 
 ---
 
-## 🚀 Training Execution
+## Training Execution
 ```bash
 conda activate logic
 bash main_grpo.sh  # 4×A100 80G
@@ -94,8 +98,8 @@ bash main_grpo.sh  # 4×A100 80G
 
 | Component              | Location                          |
 |------------------------|-----------------------------------|
-| 🏆 Reward Modeling     | `verl/utils/reward_score/kk.py`   |
-| 📚 Data Preprocessing   | `examples/data_preprocess/kk.py`  |
+| Reward Modeling     | `verl/utils/reward_score/kk.py`   |
+| Data Preprocessing   | `examples/data_preprocess/kk.py`  |
 
 ---
 
@@ -113,7 +117,7 @@ year         = {2025}
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 - [Verl](https://github.com/volcengine/verl) 🔗
 - [TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
 - [Knights and Knaves (K&K) puzzles dataset](https://github.com/AlphaPav/mem-kk-logic) 🔗
