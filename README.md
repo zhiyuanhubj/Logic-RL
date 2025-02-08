@@ -32,6 +32,8 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
     <td align="center">Test Score Plot</td>
     <td align="center">Average Output Length Plot</td>
   </tr>
+</table>
+<table>
   <tr>
     <td align="center"><img src="./pics/response.png" width="800" alt="Model Output"></td>
   </tr>
