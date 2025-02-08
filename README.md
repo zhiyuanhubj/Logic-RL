@@ -129,3 +129,9 @@ year         = {2025}
 - [Verl](https://github.com/volcengine/verl) 🔗
 - [TinyZero](https://github.com/Jiayi-Pan/TinyZero) 🔗
 - [Knights and Knaves (K&K) puzzles dataset](https://github.com/AlphaPav/mem-kk-logic) 🔗
+
+---
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Unakar/Logic-RL&type=Date)](https://star-history.com/#Unakar/Logic-RL&Date)
