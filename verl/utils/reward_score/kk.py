@@ -70,7 +70,7 @@ def parse_model_answer(answer_text: str, expected_names: list) -> Optional[Dict[
     status_dict = {}
     print("\n[Model Answer Parsing]")
     print(f"  Expected characters: {expected_names}")
-    
+
     knight_count = answer_text.lower().count('knight')
     knave_count = answer_text.lower().count('knave')
 
@@ -81,7 +81,7 @@ def parse_model_answer(answer_text: str, expected_names: list) -> Optional[Dict[
 
     for name in expected_names:
         pattern = re.compile(
-            rf'\b{re.escape(name)}\b.*?\b(knight|knave)\b', 
+            rf'\b{re.escape(name)}\b\s+is\s+a\s+\b(knight|knave)\b', 
             re.IGNORECASE
         )
         match = pattern.search(answer_text)
