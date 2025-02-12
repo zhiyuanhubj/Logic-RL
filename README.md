@@ -52,7 +52,7 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
 | GPT-4o                      | 0.68 | 0.57 | 0.49 | 0.32 | 0.23 | 0.21 | 0.11 |
 | Deepseek-Math-7b            | 0.35 | 0.21 | 0.08 | 0.06 | 0.02 | 0.00 | 0.00 |
 | Qwen2.5-7B-Instruct-1M      | 0.49 | 0.40 | 0.25 | 0.11 | 0.02 | 0.06 | 0.01 |
-| Qwen2.5-7B-Logic-RL (ours)  | 0.77 | 0.83 | 0.77 | 0.76 | 0.73 | 0.53 | 0.57 |
+| Qwen2.5-7B-Logic-RL (ours)  | 0.83 | 0.88 | 0.87 | 0.84 | 0.71 | 0.67 | 0.65 |
 
 Our model only used 2K training data with 400 training steps. More model benchmarks will be updated later this week.
 
@@ -115,7 +115,7 @@ bash main_grpo.sh  # 4×A100 80G
 ## Citation
 ```
 @misc{logic-rl,
-author       = {Tian Xie and Qingnan Ren and Yuqian Hong and Zitian Gao},
+author       = {Tian Xie and Qingnan Ren and Yuqian Hong and Zitian Gao and Haoming Luo},
 title        = {Logic-RL},
 howpublished = {https://github.com/Unakar/Logic-RL},
 note         = {Accessed: 2025-02-03},
