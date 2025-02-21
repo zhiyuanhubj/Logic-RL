@@ -1,25 +1,15 @@
 
 # Logic-RL
 
-## 🎉 **Successfully reproduced DeepSeek R1 Zero on 2K Logic Puzzle Dataset.**
-
 ## 📢 **Our detailed technical report is released!** 
+
+Logic-RL: Unleashing LLM Reasoning with Rule-Based Reinforcement Learning
 
  <a href='https://arxiv.org/abs/2502.14768'><img src='https://img.shields.io/badge/arXiv-2502.14768-b31b1b.svg'></a> &nbsp;
 
 See project explanation : [here](https://evxpwrsfkdb.feishu.cn/docx/NokEdaMBmo6aqZxVdxkcSm2cnab?from=from_copylink).
 
 Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero--VmlldzoxMTIwOTYyNw?accessToken=gnbnl5mu5pwfww7gtwxymohg85w7d7vthvjvbl4w8yxg0a99vf1k22m11e61cvv8).
-
----
-
-
-## Enhanced Features (After Rule-Based RL)
-
-| 🚩 Uncertainty Marking | 📝 Progressive Summarization | ✅ Self Verification | 🌐 Multilingual Switching |
-|------------------------|-----------------------------|---------------------|--------------------------|
-| Flag ambiguous steps for verification | Maintain intermediate conclusions | First verify then answer | Chinese reasoning traces with English answers |
-
 
 ---
 
@@ -34,26 +24,6 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td align="center"><img src="./pics/test_score_plot_v1.jpg" width="400" alt="Test Score"></td>
-    <td align="center"><img src="./pics/response_mean_length_v2.png" width="400" alt="Output Length"></td>
-  </tr>
-  <tr>
-    <td align="center">Test Score Plot</td>
-    <td align="center">Average Output Length Plot</td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td align="center"><img src="./pics/response.png" width="800" alt="Model Output"></td>
-  </tr>
-  <tr>
-    <td align="center">Model Output Example</td>
-  </tr>
-</table>
-
-
 ---
 
 ## Benchmark
@@ -67,11 +37,10 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
 | Qwen2.5-7B-Instruct-1M      | 0.49 | 0.40 | 0.25 | 0.11 | 0.02 | 0.06 | 0.01 |
 | Qwen2.5-7B-Logic-RL (ours)  | 0.99 | 0.99 | 0.94 | 0.92 | 0.91 | 0.80 | 0.67 |
 
-Our model only used 2K training data with 400 training steps. More model benchmarks will be updated later this week.
 
 ---
 
-## 🛠️ Installation
+## Installation
 
 ```bash
 conda create -n logic python=3.9
