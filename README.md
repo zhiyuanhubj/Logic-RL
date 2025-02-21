@@ -23,7 +23,16 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
 
 ---
 
-## 📸 Results Preview
+<table>
+  <tr>
+    <td align="center">
+      <img src="./pics/teaser.png" width="800" alt="Teaser Image">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">Main results</td>
+  </tr>
+</table>
 
 <table>
   <tr>
@@ -43,6 +52,7 @@ Wandb project : [here](https://wandb.ai/ustc_ai/GRPO_logic_KK/reports/GRPO-Zero-
     <td align="center">Model Output Example</td>
   </tr>
 </table>
+
 
 ---
 
