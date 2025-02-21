@@ -116,12 +116,14 @@ bash main_grpo.sh  # 4×A100 80G
 
 ## Citation
 ```
-@misc{logic-rl,
-author       = {Tian Xie and Qingnan Ren and Yuqian Hong and Zitian Gao and Haoming Luo},
-title        = {Logic-RL},
-howpublished = {https://github.com/Unakar/Logic-RL},
-note         = {Accessed: 2025-02-03},
-year         = {2025}
+@misc{xie2025logicrlunleashingllmreasoning,
+      title={Logic-RL: Unleashing LLM Reasoning with Rule-Based Reinforcement Learning}, 
+      author={Tian Xie and Zitian Gao and Qingnan Ren and Haoming Luo and Yuqian Hong and Bryan Dai and Joey Zhou and Kai Qiu and Zhirong Wu and Chong Luo},
+      year={2025},
+      eprint={2502.14768},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2502.14768}, 
 }
 ```
 
