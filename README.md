@@ -3,9 +3,9 @@
 
 ## 📢 **Our detailed technical report is released!** 
 
-Logic-RL: Unleashing LLM Reasoning with Rule-Based Reinforcement Learning <a href='https://arxiv.org/abs/2502.14768'><img src='https://img.shields.io/badge/arXiv-2502.14768-b31b1b.svg'></a> &nbsp;
+<a href='https://arxiv.org/abs/2502.14768'><img src='https://img.shields.io/badge/arXiv-2502.14768-b31b1b.svg'></a> &nbsp;
 
-
+Logic-RL: Unleashing LLM Reasoning with Rule-Based Reinforcement Learning 
 ---
 
 <table>
