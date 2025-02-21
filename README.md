@@ -1,5 +1,5 @@
 
-# Logic Rl
+# Logic-RL
 
 ## 🎉 **Successfully reproduced DeepSeek R1 Zero on 2K Logic Puzzle Dataset.**
 
