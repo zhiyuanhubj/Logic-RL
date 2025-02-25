@@ -30,9 +30,6 @@ python3 -m verl.trainer.main_ppo \
     actor_rollout_ref.ref.fsdp_config.param_offload=True \
     algorithm.kl_ctrl.kl_coef=0.001 \
     trainer.critic_warmup=0 \
-    trainer.logger=['wandb'] \
-    trainer.project_name='GRPO_logic_KK' \
-    trainer.experiment_name='Qwen-7B' \
     trainer.n_gpus_per_node=8 \
     trainer.nnodes=1 \
     trainer.default_local_dir=$format \
