@@ -42,7 +42,7 @@ PPL_VALUES="3 4 5 6 7"
 
 # Initial model path
 MODEL_PATH="Qwen/Qwen2.5-3B-Instruct"
-EXPERIMENT_NAME="RF++-Qwen-7B-1M-xppl-curriculum-001"
+EXPERIMENT_NAME="RF++-Qwen-7B-1M-xppl-curriculum-005"
 
 for ppl in $PPL_VALUES; do
     echo "Starting training for ${ppl}ppl"
